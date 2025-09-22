@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Max Harper Modelling and Technology Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -46,15 +45,15 @@
     // Project configuration with icons and descriptions
     const PROJECT_CONFIG = {
       'Trading': {
-        icon: '📈',
+        icon: '',
         description: 'Quantitative trading strategies, risk analysis, and portfolio optimization'
       },
       'Consulting': {
-        icon: '💼', 
+        icon: '',
         description: 'Data analytics and business intelligence solutions for client engagements'
       },
       'Greyhounds': {
-        icon: '�',
+        icon: '',
         description: 'Machine learning models for racing predictions and performance analysis'
       }
     };
@@ -105,7 +104,7 @@
             <span class="toc-number">${sectionNumber}</span>
             <div class="toc-content">
               <div class="toc-link main-project-title">
-                <span class="toc-icon">${config.icon}</span>${sanitizeFolderName(folderName)}
+                ${sanitizeFolderName(folderName)}
               </div>
               <div class="toc-description">${config.description}</div>
             </div>
@@ -124,12 +123,11 @@
                 <span class="toc-number">${sectionNumber}.${index + 1}</span>
                 <div class="toc-content">
                   <a href="${folderName}/${subfolder.name}/" class="toc-link sub-project-link">
-                    <span class="toc-icon">�</span>${sanitizeFolderName(subfolder.name)}
+                    <span class="toc-icon">📁</span>${sanitizeFolderName(subfolder.name)}
                   </a>
                 </div>
                 <div class="toc-dots"></div>
               `;
-              
               tocList.appendChild(subItem);
             });
           }
