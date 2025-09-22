@@ -221,6 +221,72 @@ footer {
   margin-top: 3rem;
 }
 
+/* Project Page Styles */
+section {
+  margin-bottom: 3rem;
+}
+
+.lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #374151;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card ol, .card ul {
+  margin-left: 1.5rem;
+}
+
+.card li {
+  margin-bottom: 0.5rem;
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.svg-wrap {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin: 2rem 0;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2rem;

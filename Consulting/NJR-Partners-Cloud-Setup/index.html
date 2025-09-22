@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NJR Pilot Applications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <h1>NJR Pilot Applications</h1>
+        <!-- <p class="subtitle">Automated ingestion → structured insights → timely reporting</p> -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section>
+        <p class="lead">
+          Investment data is often fragmented across PDFs, emails, websites, and APIs, making manual collection 
+          time-consuming and error-prone. Key risk and performance parameters are spread across multiple sources, 
+          while unstructured commentary remains difficult to incorporate into dashboards and governance cycles.
+        </p>
+        <br>
+        <p class="lead">
+          I developed a lightweight, serverless system that automates these core investment-management workflows —
+          from collecting data across emails, web endpoints, and PDFs to normalising it in SQL and piping
+          concise, governance-ready summaries to dashboards and email. The solution uses event-driven automation 
+          with modular functions: serverless jobs ingest data on schedules or triggers, extract numeric fields 
+          via selectors while summarising text with LLMs, then persist everything to SQL and object storage 
+          before publishing to dashboards and email templates.
+        </p>
+        <br>
+        <br>
+
+        
+        <div class="tag-list">
+          <span class="pill">Serverless</span>
+          <span class="pill">Python</span>
+          <span class="pill">SQL + Object Storage</span>
+          <span class="pill">LLM Structured Data Extraction</span>
+          <span class="pill">Automated Reporting</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Architecture (Simplified)</h2>
+        <div class="svg-wrap" aria-label="Simplified architecture diagram">
+          <svg viewBox="0 0 980 240" width="100%" height="100%" role="img">
+            <!-- Inputs -->
+            <rect x="20" y="40" width="180" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="110" y="75" text-anchor="middle" font-size="14">Web / APIs</text>
+
+            <rect x="20" y="130" width="180" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="110" y="165" text-anchor="middle" font-size="14">Email (ingest)</text>
+
+            <!-- Processing -->
+            <rect x="260" y="40" width="220" height="150" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="370" y="70" text-anchor="middle" font-size="14">Serverless Processing</text>
+            <text x="370" y="95" text-anchor="middle" font-size="12" fill="#6b7280">Extract numbers • Parse PDFs</text>
+            <text x="370" y="115" text-anchor="middle" font-size="12" fill="#6b7280">LLM summarisation</text>
+            <text x="370" y="135" text-anchor="middle" font-size="12" fill="#6b7280">Validation / dedupe</text>
+
+            <!-- Storage -->
+            <rect x="540" y="40" width="180" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="630" y="75" text-anchor="middle" font-size="14">SQL (facts)</text>
+
+            <rect x="540" y="130" width="180" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="630" y="165" text-anchor="middle" font-size="14">Object Storage (PDFs)</text>
+
+            <!-- Outputs -->
+            <rect x="760" y="40" width="200" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="860" y="75" text-anchor="middle" font-size="14">Internal Dashboards</text>
+
+            <rect x="760" y="130" width="200" height="60" rx="12" fill="#ffffff" stroke="#d4d4d8"/>
+            <text x="860" y="165" text-anchor="middle" font-size="14">Email Reports</text>
+
+            <!-- Arrows -->
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L6,3 z" fill="#9ca3af" />
+              </marker>
+            </defs>
+
+            <line x1="200" y1="70" x2="260" y2="70" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+            <line x1="200" y1="160" x2="260" y2="160" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+
+            <line x1="480" y1="115" x2="540" y2="70" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+            <line x1="480" y1="115" x2="540" y2="160" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+
+            <line x1="720" y1="70" x2="760" y2="70" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+            <line x1="720" y1="160" x2="760" y2="160" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+          </svg>
+        </div>
+      </section>
+      <br>
+
+      <section class="grid grid-2">
+        <div class="card">
+          <h2>Data Flow</h2>
+          <ol>
+            <li><strong>Ingestion</strong>: Scheduled scrapes/API calls and email triggers detect new updates.</li>
+            <li><strong>Extraction</strong>: Numeric fields parsed with deterministic selectors; documents stored.</li>
+            <li><strong>Understanding</strong>: LLM prompts produce concise highlights (risk, drivers, changes).</li>
+            <li><strong>Validation</strong>: Compare against prior values, apply thresholds, flag anomalies.</li>
+            <li><strong>Delivery</strong>: Persist to SQL, publish to dashboards, send templated email briefings.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h2>Impact</h2>
+          <ul>
+            <li>Faster reporting cycles and reduced manual collection effort.</li>
+            <li>Consistent, auditable parameters for risk monitoring and governance.</li>
+            <li>Actionable summaries that surface material changes across sources.</li>
+          </ul>
+          <p class="small muted">Indicative outcomes; specific client data intentionally omitted.</p>
+        </div>
+      </section>
+
+      
+
+      <section>
+       <iframe src="https://edwardrenton.grafana.net/d-solo/rek89zp/njr-external?orgId=1&from=1569852000000&to=1758535340369&timezone=browser&panelId=1&__feature.dashboardSceneSolo=true" width="450" height="200" frameborder="0"></iframe>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      &copy; 2025 Max Harper | Hosted on GitHub Pages
+    </div>
+  </footer>
+</body>
+</html>
