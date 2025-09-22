@@ -62,7 +62,7 @@
     function sanitizeFolderName(folderName) {
       return folderName
         .replace(/[-_]/g, ' ')  // Replace hyphens and underscores with spaces
-        .replace(/([A-Z])/g, ' $1')  // Add space before capital letters
+        .replace(/([a-z0-9])([A-Z])/g, '$1 $2')  // Add space on lower→Upper transitions
         .replace(/\s+/g, ' ')  // Collapse multiple spaces
         .trim()  // Remove leading/trailing spaces
         .replace(/\b\w/g, l => l.toUpperCase());  // Capitalize first letter of each word
