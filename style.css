@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  line-height: 1.6;
+  color: #333;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.nav-links {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+main {
+  padding: 3rem 0;
+}
+
+.toc-container {
+  background: white;
+  border-radius: 15px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.toc-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+}
+
+.toc-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 1rem;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+
+.toc-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toc-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.toc-number {
+  font-weight: 600;
+  color: #3498db;
+  margin-right: 1rem;
+  min-width: 30px;
+}
+
+.toc-content {
+  flex-grow: 1;
+}
+
+.toc-link {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.toc-link:hover {
+  color: #3498db;
+}
+
+.toc-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 2px dotted #ddd;
+  margin: 0 1rem;
+  height: 1px;
+}
+
+.toc-icon {
+  margin-right: 0.5rem;
+}
+
+.loading-state {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.main-project {
+  border-bottom: 2px solid #ecf0f1 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.main-project-title {
+  font-weight: 600;
+  color: #2c3e50;
+  cursor: default;
+}
+
+.sub-project {
+  margin-left: 2rem;
+  margin-bottom: 1rem !important;
+  padding: 0.5rem 0 !important;
+  border-bottom: 1px solid #f8f9fa !important;
+}
+
+.sub-project .toc-number {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.sub-project-link {
+  font-size: 1rem !important;
+  color: #34495e;
+}
+
+.sub-project-link:hover {
+  color: #3498db;
+}
+
+footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .toc-container {
+    padding: 2rem;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .toc-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .toc-dots {
+    display: none;
+  }
+}
