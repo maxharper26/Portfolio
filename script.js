@@ -2,14 +2,15 @@ const GITHUB_API_BASE = 'https://api.github.com/repos/maxharper26/Portfolio/cont
 
 // Project configuration with icons and descriptions
 const PROJECT_CONFIG = {
+    'Trading': {
+    icon: '',
+    description: 'Quantitative trading strategies using Machine Learning.'
+    },
     'Consulting': {
     icon: '',
     description: 'Data analytics and Business Intelligence Solutions.'
     },
-     'Trading': {
-    icon: '',
-    description: 'Quantitative trading strategies using Machine Learning.'
-    },
+     
 
 };
 
