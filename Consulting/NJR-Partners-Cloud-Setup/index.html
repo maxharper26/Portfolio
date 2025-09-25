@@ -10,7 +10,7 @@
   <header>
     <div class="container">
       <div class="header-content">
-        <h1>NJR Pilot Applications</h1>
+        <h1>NJR Partners Pilot Applications</h1>
         <!-- <p class="subtitle">Automated ingestion → structured insights → timely reporting</p> -->
       </div>
     </div>
@@ -93,6 +93,10 @@
 
             <line x1="720" y1="70" x2="760" y2="70" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
             <line x1="720" y1="160" x2="760" y2="160" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+            <line x1="720" y1="70" x2="760" y2="160" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+            <line x1="720" y1="160" x2="760" y2="70" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)" />
+
+
           </svg>
         </div>
       </section>
@@ -123,16 +127,21 @@
 
       
 
-      <section>
+     <!--  <section>
        <iframe src="https://edwardrenton.grafana.net/d-solo/rek89zp/njr-external?orgId=1&from=1569852000000&to=1758535340369&timezone=browser&panelId=1&__feature.dashboardSceneSolo=true" width="450" height="200" frameborder="0"></iframe>
-      </section>
+      </section> -->
     </div>
   </main>
 
+
   <footer>
     <div class="container">
-      &copy; 2025 Max Harper | Hosted on GitHub Pages
+      &copy; <script>document.write(new Date().getFullYear())</script> Max Harper | Hosted on GitHub Pages
     </div>
   </footer>
 </body>
 </html>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>

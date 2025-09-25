@@ -102,3 +102,4 @@ async function buildTableOfContents() {
 
 // Load the table of contents when page loads
 document.addEventListener('DOMContentLoaded', buildTableOfContents);
+// document.getElementById("year").textContent = new Date().getFullYear();
