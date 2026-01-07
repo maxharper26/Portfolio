@@ -8,7 +8,7 @@ const PROJECT_CONFIG = {
     },
     'Consulting': {
     icon: '',
-    description: 'Data analytics and Business Intelligence Solutions.'
+    description: 'Data analytics and Business Solutions.'
     },
      
 
