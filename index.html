@@ -2,48 +2,515 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Max Harper Modelling and Technology Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Max Harper</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-2: #21253a;
+      --border: #2a2d3e;
+      --text: #e8eaf0;
+      --text-muted: #8b8fa8;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --green: #22c55e;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,17,23,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav .logo { font-weight: 700; font-size: 1rem; color: var(--text); letter-spacing: 0.02em; }
+    nav .nav-links { display: flex; gap: 1.5rem; }
+    nav .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    nav .nav-links a:hover { color: var(--text); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2.section-title {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 56px; }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+      width: 100%; padding: 2rem 0;
+    }
+    .hero-text .eyebrow {
+      font-size: 0.8rem; font-weight: 500; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero-text h1 span { color: var(--accent); }
+    .hero-text .bio {
+      font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.75;
+    }
+    .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.875rem;
+      font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-light); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
+
+    /* Hero right column: photo */
+    .hero-photo {
+      width: 180px; height: 220px; border-radius: 16px;
+      overflow: hidden; border: 2px solid var(--border); flex-shrink: 0;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .hero-photo .placeholder {
+      width: 100%; height: 100%; background: var(--surface-2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 0.75rem; text-align: center; padding: 1rem;
+    }
+
+    /* Hero skill pills */
+    .hero-skills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 2rem; }
+    .hero-skill-pill {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.75rem; padding: 0.25rem 0.7rem;
+      border-radius: 99px; font-weight: 500;
+    }
+
+    /* ── PROJECTS — side by side ── */
+    .projects-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      align-items: stretch;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .project-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .project-card .project-sub {
+      color: var(--accent-light); font-size: 0.75rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.9rem;
+    }
+    .project-card p { color: var(--text-muted); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1rem; }
+    .pills { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .pill {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.7rem; padding: 0.2rem 0.55rem;
+      border-radius: 99px; font-weight: 500;
+    }
+
+    /* Returns chart — full width inside VIX card */
+    .chart-wrap { margin-top: auto; }
+    .chart-wrap img {
+      width: 100%; border-radius: 10px; border: 1px solid var(--border);
+      display: block;
+    }
+    .img-caption { text-align: center; color: var(--text-muted); font-size: 0.7rem; margin-top: 0.4rem; }
+
+    /* NJR architecture SVG */
+    .arch-wrap {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.75rem; margin-top: auto; overflow-x: auto;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+    .info-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
+    }
+    .info-card h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.6rem; }
+    .info-card ol, .info-card ul { padding-left: 1.1rem; color: var(--text-muted); font-size: 0.8rem; }
+    .info-card li { margin-bottom: 0.35rem; line-height: 1.5; }
+    .info-card strong { color: var(--text); }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 0 2rem; padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-dates { color: var(--text-muted); font-size: 0.8rem; padding-top: 0.15rem; }
+    .exp-role { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .exp-company { color: var(--accent-light); font-size: 0.83rem; margin-bottom: 0.35rem; }
+    .exp-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .skill-group h4 {
+      font-size: 0.7rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+    }
+    .skill-group ul { list-style: none; }
+    .skill-group li { color: var(--text-muted); font-size: 0.85rem; padding: 0.2rem 0; }
+    .skill-group li::before { content: "·  "; color: var(--accent); }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .edu-card h3 { font-size: 0.975rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .edu-card .degree { color: var(--accent-light); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .edu-card .edu-meta { color: var(--text-muted); font-size: 0.825rem; }
+    .award-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .award {
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3);
+      color: var(--accent-light); font-size: 0.72rem; padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0; text-align: center;
+      color: var(--text-muted); font-size: 0.8rem;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { width: 120px; height: 150px; }
+      .hero-links { gap: 0.5rem; }
+      .btn { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
+    }
+    @media (max-width: 640px) {
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-dates { margin-bottom: 0.25rem; }
+      .two-col { grid-template-columns: 1fr; }
+      nav .nav-links { gap: 1rem; }
+      nav .nav-links a { font-size: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <h1>Max Harper</h1>
-        <p class="subtitle">Modelling and Technology Projects</p>
-        <div class="nav-links">
-          <a href="CV.pdf" target="_blank" class="nav-link">📄 CV</a>
-          <a href="Thesis.pdf" target="_blank" class="nav-link">🎓 Honours Thesis</a>
+
+<nav>
+  <span class="logo">Max Harper</span>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Data · Quant · Technology</p>
+        <h1>Max<br><span>Harper</span></h1>
+        <p class="bio">
+          Data analyst and quantitative researcher with experience across investment management,
+          analytics, and financial data science. Currently a Graduate Analyst at
+          Quantium CBAiQ. Passionate about leveraging data and technology to solve hard problems.
+        </p>
+        <div class="hero-links">
+          <a href="pdfs/CV.pdf" target="_blank" class="btn btn-primary"><i class="fa fa-file-pdf"></i> CV</a>
+          <a href="pdfs/Thesis.pdf" target="_blank" class="btn btn-ghost"><i class="fa fa-graduation-cap"></i> Honours Thesis</a>
+          <!-- <a href="mailto:maxharper26@icloud.com" class="btn btn-ghost"><i class="fa fa-envelope"></i> Email</a> -->
+          <a href="https://www.linkedin.com/in/max-harper-0207a3203" target="_blank" class="btn btn-ghost"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <div class="hero-skills">
+          <span class="hero-skill-pill">Python</span>
+          <span class="hero-skill-pill">SQL</span>
+          <span class="hero-skill-pill">pandas</span>
+          <span class="hero-skill-pill">sklearn</span>
+          <span class="hero-skill-pill">PyTorch</span>
+          <span class="hero-skill-pill">ML</span>
+          <span class="hero-skill-pill">AWS</span>
+          <span class="hero-skill-pill">GCP</span>
+          <span class="hero-skill-pill">Claude + Claude Code</span>
+          <span class="hero-skill-pill">Serverless</span>
+          <span class="hero-skill-pill">Backtesting</span>
+          <span class="hero-skill-pill">Volatility Derivatives</span>
+          <span class="hero-skill-pill">Portfolio Construction</span>
         </div>
       </div>
-    </div>
-  </header>
-  
-  <main>
-    <div class="container">
-      <div class="toc-container">
-        <h2 class="toc-title">Projects</h2>
-        <div id="loading" class="loading-state">Loading projects...</div>
-        <ul class="toc-list" id="toc-list" style="display: none;">
-          <!-- Dynamic content will be inserted here -->
-        </ul>
+      <div class="hero-photo">
+        <img src="imgs/best_one copy.JPG" alt="Max Harper">
       </div>
     </div>
-  </main>
+  </div>
+</section>
 
-  <main>
-    <div class="container">
-      <p class="email-description">Feel free to reach out: <a href="mailto:maxharper26@icloud.com" class="email-link">maxharper26@icloud.com</a></p>  
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <!-- VIX Thesis -->
+      <div class="project-card reveal">
+        <p class="project-sub">Honours Thesis · Bishopsgate Capital</p>
+        <h3>VIX Futures Forecasting via Implied Volatility Surface</h3>
+        <p>
+          Investigated whether the S&amp;P 500 implied volatility surface contains predictive information for VIX futures.
+          Applied PCA and autoencoders to compress the high-dimensional IV surface into forecasting features,
+          evaluated across multiple ML models. Trading simulations demonstrated economically significant cumulative
+          returns across the 2015–2023 backtest period.
+        </p>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">PCA &amp; Autoencoders</span>
+          <span class="pill">Gradient Boosting</span>
+          <span class="pill">LSTM</span>
+          <span class="pill">VIX Futures</span>
+          <span class="pill">Implied Volatility</span>
+        </div>
+        <div class="chart-wrap">
+          <img src="imgs/returns_models.png" alt="Cumulative return of trades by model">
+          <p class="img-caption">Cumulative returns by model, 2015–2023 backtest</p>
+        </div>
+        <div style="margin-top:1.25rem">
+          <a href="pdfs/Thesis.pdf" target="_blank" class="btn btn-ghost"><i class="fa fa-graduation-cap"></i> Read Thesis</a>
+        </div>
+      </div>
+
+      <!-- NJR -->
+      <div class="project-card reveal reveal-delay-1">
+        <p class="project-sub">NJR Partners · 2024–2026</p>
+        <h3>Investment Process Automation</h3>
+        <p>
+          I built a lightweight serverless system automating  core data collection to support the investment process at NJR Partners: 
+          ingesting data from emails, web endpoints, and PDFs; normalising it in SQL; and piping
+          outputs to dashboards and email. This utilises LLMs to extract structured data from unstructured sources, 
+          ultimatelyhelping deliver an efficient investment product.
+        </p>
+        <div class="pills">
+          <span class="pill">Serverless (GCP)</span>
+          <span class="pill">Python</span>
+          <span class="pill">SQL + Object Storage</span>
+          <span class="pill">LLM Extraction</span>
+          <span class="pill">Automated Reporting</span>
+        </div>
+        <div class="arch-wrap">
+          <svg viewBox="0 0 980 240" width="100%" role="img" aria-label="Architecture diagram">
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L6,3 z" fill="#6366f1"/>
+              </marker>
+            </defs>
+            <rect x="20" y="40" width="160" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="100" y="73" text-anchor="middle" font-size="13" fill="#e8eaf0" font-family="Inter,sans-serif">Web / APIs</text>
+            <rect x="20" y="130" width="160" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="100" y="163" text-anchor="middle" font-size="13" fill="#e8eaf0" font-family="Inter,sans-serif">Email (ingest)</text>
+            <rect x="240" y="30" width="220" height="170" rx="10" fill="#21253a" stroke="#6366f1" stroke-dasharray="4 3"/>
+            <text x="350" y="58" text-anchor="middle" font-size="13" fill="#818cf8" font-family="Inter,sans-serif" font-weight="600">Serverless Processing</text>
+            <text x="350" y="82" text-anchor="middle" font-size="11" fill="#8b8fa8" font-family="Inter,sans-serif">Extract numbers · Parse PDFs</text>
+            <text x="350" y="102" text-anchor="middle" font-size="11" fill="#8b8fa8" font-family="Inter,sans-serif">LLM summarisation</text>
+            <text x="350" y="122" text-anchor="middle" font-size="11" fill="#8b8fa8" font-family="Inter,sans-serif">Validation / dedupe</text>
+            <rect x="520" y="40" width="160" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="600" y="73" text-anchor="middle" font-size="13" fill="#e8eaf0" font-family="Inter,sans-serif">SQL (facts)</text>
+            <rect x="520" y="130" width="160" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="600" y="157" text-anchor="middle" font-size="11" fill="#e8eaf0" font-family="Inter,sans-serif">Object Storage</text>
+            <text x="600" y="174" text-anchor="middle" font-size="11" fill="#8b8fa8" font-family="Inter,sans-serif">(PDFs)</text>
+            <rect x="750" y="40" width="200" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="850" y="73" text-anchor="middle" font-size="13" fill="#e8eaf0" font-family="Inter,sans-serif">Internal Dashboards</text>
+            <rect x="750" y="130" width="200" height="56" rx="10" fill="#21253a" stroke="#3a3d55"/>
+            <text x="850" y="163" text-anchor="middle" font-size="13" fill="#e8eaf0" font-family="Inter,sans-serif">Email Reports</text>
+            <line x1="180" y1="68" x2="240" y2="90" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="180" y1="158" x2="240" y2="140" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="460" y1="90" x2="520" y2="68" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="460" y1="110" x2="520" y2="158" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="680" y1="68" x2="750" y2="68" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="680" y1="158" x2="750" y2="158" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="680" y1="68" x2="750" y2="158" stroke="#6366f1" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+          </svg>
+        </div>
+        <div class="two-col">
+          <div class="info-card">
+            <h4>Data Flow</h4>
+            <ol>
+              <li><strong>Ingestion</strong> — scrapes, API calls, email triggers</li>
+              <li><strong>Extraction</strong> — numeric selectors; documents stored</li>
+              <li><strong>Understanding</strong> — LLM risk highlights</li>
+              <li><strong>Validation</strong> — threshold checks, anomaly flagging</li>
+              <li><strong>Delivery</strong> — SQL, dashboards, email briefings</li>
+            </ol>
+          </div>
+          <div class="info-card">
+            <h4>Impact</h4>
+            <ul>
+              <li>Faster reporting, less manual collection</li>
+              <li>Auditable parameters for risk governance</li>
+              <li>Surfaces material changes across sources</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </main>
+  </div>
+</section>
 
-  <footer>
-    <div class="container">
-      &copy; <script>document.write(new Date().getFullYear())</script> Max Harper | Hosted on GitHub Pages
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-dates">Feb 2026 – Present</div>
+        <div>
+          <div class="exp-role">Graduate Analyst</div>
+          <div class="exp-company">Quantium CBAiQ</div>
+          <div class="exp-desc">Applying machine learning and data science to deliver insights at scale within CBA's analytics division.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Jan 2025 – Nov 2025</div>
+        <div>
+          <div class="exp-role">Quantitative Analyst</div>
+          <div class="exp-company">Bishopsgate Capital</div>
+          <div class="exp-desc">Developed and backtested systematic trading strategies in volatility derivatives, leveraging the SPX implied volatility surface and ML models to forecast VIX futures. Conducted in parallel with Honours thesis.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Feb 2024 – Jan 2026</div>
+        <div>
+          <div class="exp-role">Investment Technology Analyst</div>
+          <div class="exp-company">NJR Partners</div>
+          <div class="exp-desc">Built a serverless GCP system automating core investment management processes — risk monitoring, reporting, and LLM-powered extraction of unstructured data into structured investment governance insights.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">May 2024 – Dec 2024</div>
+        <div>
+          <div class="exp-role">Quantitative Analyst</div>
+          <div class="exp-company">Blue Lake Partners</div>
+          <div class="exp-desc">Researched and backtested systematic strategies in commodity equities, including signal generation and portfolio construction across the sector.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Dec 2023 – Feb 2024</div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-company">Fulton Market Group</div>
+          <div class="exp-desc">Contributed to agricultural commodity price forecasting research.</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dates">Dec 2022 – Feb 2023</div>
+        <div>
+          <div class="exp-role">Data Analyst Intern</div>
+          <div class="exp-company">Quantium</div>
+          <div class="exp-desc">FMCG division — data investigations and backtesting an analytical model in an agile team environment.</div>
+        </div>
+      </div>
+
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card reveal">
+      <h3>University of Sydney</h3>
+      <div class="degree">Bachelor of Advanced Computing and Commerce (Honours) · Data Science &amp; Business Analytics</div>
+      <div class="edu-meta">Graduated 2025</div>
+      <div class="award-list">
+        <span class="award">First Class Honours</span>
+        <span class="award">HD 86 WAM</span>
+        <span class="award">Engineering Entry Scholarship</span>
+        <span class="award">Daylell Scholarship</span>
+        <span class="award">Academic High Honour Roll</span>
+        <span class="award">Dean's List</span>
+        <span class="award">Business Analytics Prize</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <h3>Sydney Grammar School</h3>
+      <div class="degree">HSC 2020</div>
+      <div class="edu-meta">99.85 ATAR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <p>
+      <a href="pdfs/CV.pdf" target="_blank">CV</a> &nbsp;·&nbsp;
+      <a href="pdfs/Thesis.pdf" target="_blank">Thesis</a> &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/max-harper-0207a3203" target="_blank">LinkedIn</a>
+    </p>
+    <p style="margin-top:0.5rem">&copy; <script>document.write(new Date().getFullYear())</script> Max Harper</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav .nav-links a');
+  const navObserver = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--text)';
+      }
+    }),
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+  sections.forEach(s => navObserver.observe(s));
+</script>
+
 </body>
 </html>
