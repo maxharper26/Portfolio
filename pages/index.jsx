@@ -62,9 +62,24 @@ export default function Home() {
 
   // Fetch TWR
   useEffect(() => {
+    const CACHE_KEY = 'twr_cache'
+    const CACHE_TTL = 24 * 60 * 60 * 1000 // 24 hours
+    try {
+      const cached = localStorage.getItem(CACHE_KEY)
+      if (cached) {
+        const { data, ts } = JSON.parse(cached)
+        if (Date.now() - ts < CACHE_TTL) {
+          setTwrData(data)
+          return
+        }
+      }
+    } catch {}
     fetch('/api/twr')
       .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => setTwrData(data))
+      .then(data => {
+        setTwrData(data)
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() })) } catch {}
+      })
       .catch(() => setTwrError(true))
   }, [])
 

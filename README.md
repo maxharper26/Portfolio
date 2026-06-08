@@ -2,7 +2,7 @@
 
 Personal portfolio site built with Next.js, deployed on Vercel.
 
-**Live URL:** (update after first Vercel deploy)
+**Live URL:** https://personalportfolio-sand-seven.vercel.app/#projects
 
 ---
 
@@ -40,15 +40,18 @@ portfolio/
 ## Data Sources
 
 ### Portfolio TWR (`/api/twr`)
+
 - Reads `portfolio-twr-cache.json` from Vercel Blob
 - Blob shape: `{ twr: [{date, twr}], vgs: [{date, twr}] }` — both series indexed to 100
 - Written by the unified-app (`/api/stocks.js`) on each load, with 24h in-memory throttle
 - Manual seed: `scripts/upload_twr_from_file.mjs` in the unified-app repo
 
 ### ML Model Returns (`/data/twr_by_model.json`)
+
 - Static file in `public/data/` — generated from the VIX notebook
 - Shape: `{ "Model Name": { "YYYY-MM-DD": value, ... }, ... }`
 - To regenerate, run in `vix-mini/analysis/ml_sims_vis.ipynb`:
+
 ```python
 import json
 from pathlib import Path
@@ -56,6 +59,7 @@ twr_export = {name: tdf['cumulative_fixed_trade_size_return'].to_dict() for name
 with open(Path('../portfolio/public/data/twr_by_model.json'), 'w') as f:
     json.dump({str(k): v for k, v in twr_export.items()}, f)
 ```
+
 - Model name keys must match exactly: `Linear Regression`, `Ridge Regression`, `Lasso Regression`, `Random Forest`, `Gradient Boosting`, `Neural Network`, `Nearest Neighbors`, `LSTM`
 
 ---
